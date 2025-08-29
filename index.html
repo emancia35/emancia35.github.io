@@ -5,37 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Erick Mancia | BI & Data</title>
   <style>
-    body { font-family: system-ui, Arial, sans-serif; margin: 0; line-height: 1.6; color: #111;}
-    header { background:#1f2937; color:#fff; text-align:center; padding:48px 16px;}
-    nav a { color:#fff; text-decoration:none; margin:0 12px; }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 24px; }
-    .card { border:1px solid #eee; border-radius:14px; padding:20px; margin:16px 0;}
-    .btn { display:inline-block; background:#2563eb; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; }
-    .photo { width:180px; height:180px; border-radius:50%; object-fit:cover; margin:12px 0; }
-    footer { text-align:center; color:#666; background:#f6f7f9; padding:18px; }
+    :root{
+      --bg:#0f2435; --fg:#ffffff; --card:#ffffff; --muted:#6b7280; --link:#2563eb; --border:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,Arial,sans-serif;margin:0;line-height:1.6;color:#111;background:#f6f7f9}
+    header{background:var(--bg);color:var(--fg);text-align:center;padding:44px 16px;position:sticky;top:0;z-index:1}
+    h1{margin:0 0 6px 0}
+    nav{margin-top:8px}
+    nav a{color:#fff;text-decoration:none;margin:0 12px;font-weight:500}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin:18px 0}
+    .btn{display:inline-block;background:var(--link);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}
+    .muted{color:var(--muted)}
+    .photo{width:180px;height:180px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:4px solid #fff;box-shadow:0 6px 22px rgba(0,0,0,.08)}
+    footer{text-align:center;color:#666;background:#eef0f3;padding:18px;margin-top:24px}
+    .topbar{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:6px}
+    .langbtn{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:20px;padding:6px 10px;cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:800px){ .grid{grid-template-columns:1fr} }
+    .kpis{display:flex;gap:14px;flex-wrap:wrap}
+    .pill{border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:#fff}
+    .icons a{margin-right:10px;text-decoration:none}
+    .icons svg{vertical-align:-3px}
   </style>
 </head>
 <body>
   <header>
     <h1>Erick Mancia</h1>
-    <p>Business Intelligence · Data · Dynamics 365 Business Central</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="muted" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
+    <div class="topbar">
+      <nav>
+        <a href="#about" id="mAbout">About</a>
+        <a href="#experience" id="mExp">Experience</a>
+        <a href="#skills" id="mSkills">Skills</a>
+        <a href="#contact" id="mContact">Contact</a>
+      </nav>
+      <button class="langbtn" id="langToggle">ES</button>
+    </div>
   </header>
+
   <main class="wrap">
     <section id="about" class="card" style="text-align:center">
-  <img src="Erick.jpg?v=2" alt="Erick Mancia" class="photo" style="display:block;margin:0 auto 12px;">
-  <h2>About</h2>
-  <p>BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central, SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.</p>
-  <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener">📄 Download Full Resume (PDF)</a>
-</section>
+      <img src="Erick.jpg" alt="Erick Mancia" class="photo">
+      <h2 id="tAbout">About</h2>
+      <p id="pAbout">
+        BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central,
+        SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.
+      </p>
+      <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
+    </section>
+
     <section id="experience" class="card">
-      <h2>Selected Experience</h2>
-      <ul>
+      <h2 id="tExp">Selected Experience</h2>
+      <ul id="listExp">
         <li><strong>Kwong Yet Lung Co (2022–Present)</strong> — BI Analyst: BC (AL/SQL), Power BI, Jet Reports, Insight Works.</li>
         <li><strong>Aargon Collection (2021–2022)</strong> — Software Dev Engineer: C#, VB.NET, APIs, SQL.</li>
         <li><strong>Infosys Mexico (2013–2016)</strong> — BI Support: payments/credit-card ops, Power BI, SQL Server.</li>
@@ -44,18 +67,83 @@
     </section>
 
     <section id="skills" class="card">
-      <h2>Key Skills</h2>
-      <p>SQL · Power BI · Jet Reports · Python/R · Dynamics 365 BC · SSIS/SSRS · C# · VB.NET</p>
+      <h2 id="tSkills">Key Skills</h2>
+      <div class="kpis" id="chips">
+        <span class="pill">SQL</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Jet Reports</span>
+        <span class="pill">Python / R</span>
+        <span class="pill">Dynamics 365 BC</span>
+        <span class="pill">SSIS / SSRS</span>
+        <span class="pill">C# / VB.NET</span>
+      </div>
     </section>
 
     <section id="contact" class="card">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:emancia35@gmail.com">emancia35@gmail.com</a> · LinkedIn: <a href="https://linkedin.com/in/erickmancia" target="_blank" rel="noopener">linkedin.com/in/erickmancia</a></p>
+      <h2 id="tContact">Contact</h2>
+      <div class="grid">
+        <div>
+          <p id="cLine">Let’s connect. I’m open to BI / Data / ERP roles.</p>
+          <p>
+            📧 <a href="mailto:emancia35@gmail.com">emancia35@gmail.com</a><br>
+            📞 <a href="tel:+14109342686">+1 410-934-2686</a>
+          </p>
+          <div class="icons">
+            <a href="https://linkedin.com/in/erickmancia" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <!-- simple LinkedIn icon -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8.98h5V24H0V8.98zM8.98 8.98h4.78v2.05h.07c.66-1.25 2.28-2.56 4.69-2.56 5.01 0 5.94 3.3 5.94 7.58V24h-5v-6.69c0-1.59-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V24h-5V8.98z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        <div class="muted">
+          <p id="availability"><strong>Availability:</strong> Open to remote/hybrid. Las Vegas, NV (PST).</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
     © <script>document.write(new Date().getFullYear())</script> Erick Mancia
   </footer>
+
+  <!-- Simple EN/ES toggle -->
+  <script>
+    const t = {
+      en: {
+        mAbout:"About", mExp:"Experience", mSkills:"Skills", mContact:"Contact",
+        tAbout:"About", tExp:"Selected Experience", tSkills:"Key Skills", tContact:"Contact",
+        pAbout:"BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central, SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.",
+        btnResume:"📄 Download Full Resume (PDF)",
+        cLine:"Let’s connect. I’m open to BI / Data / ERP roles.",
+        availability:"Availability: Open to remote/hybrid. Las Vegas, NV (PST).",
+        tagline:"Business Intelligence · Data · Dynamics 365 Business Central",
+        langBtn:"ES"
+      },
+      es: {
+        mAbout:"Sobre mí", mExp:"Experiencia", mSkills:"Habilidades", mContact:"Contacto",
+        tAbout:"Sobre mí", tExp:"Experiencia destacada", tSkills:"Habilidades clave", tContact:"Contacto",
+        pAbout:"Analista BI con 15+ años en Retail, Pricing y Supply Chain. Experto en Microsoft Dynamics 365 Business Central, SQL y Power BI. Uno el análisis funcional con la implementación técnica para resultados basados en datos.",
+        btnResume:"📄 Descargar CV completo (PDF)",
+        cLine:"Conectemos. Abierto a roles BI / Datos / ERP.",
+        availability:"Disponibilidad: Abierto a remoto/híbrido. Las Vegas, NV (PST).",
+        tagline:"Business Intelligence · Datos · Dynamics 365 Business Central",
+        langBtn:"EN"
+      }
+    };
+    let lang = 'en';
+    const $ = id => document.getElementById(id);
+    function apply(){
+      const L = t[lang];
+      $("mAbout").textContent=L.mAbout; $("mExp").textContent=L.mExp; $("mSkills").textContent=L.mSkills; $("mContact").textContent=L.mContact;
+      $("tAbout").textContent=L.tAbout; $("tExp").textContent=L.tExp; $("tSkills").textContent=L.tSkills; $("tContact").textContent=L.tContact;
+      $("pAbout").textContent=L.pAbout; $("btnResume").textContent=L.btnResume; $("cLine").textContent=L.cLine; $("availability").textContent=L.availability;
+      $("tagline").textContent=L.tagline; $("langToggle").textContent=L.langBtn;
+    }
+    $("langToggle").onclick = ()=>{ lang = (lang==='en'?'es':'en'); apply(); };
+    apply();
+  </script>
 </body>
 </html>
