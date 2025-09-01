@@ -1,104 +1,93 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Erick Mancia | BI & Data</title>
   <style>
-    :root{
-      --bg:#0f2435; --fg:#fff; --card:#fff; --muted:#6b7280; --link:#2563eb; --border:#e5e7eb;
-      --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.08);
+    :root {
+      --bg: #0f2435;
+      --fg: #ffffff;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --link: #2563eb;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0,0,0,.18);
+      --radius: 14px;
     }
     *{box-sizing:border-box}
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;line-height:1.6;color:#111;background:#f6f7f9}
-
-    /* HEADER MÁS BAJO */
+    body{margin:0;font-family:system-ui,Arial,Segoe UI,sans-serif;line-height:1.6;color:#111;background:#f6f7f9}
+    /* Header más delgado */
     header{
-      background:var(--bg); color:var(--fg); text-align:center;
-      padding:28px 16px; position:sticky; top:0; z-index:50;
-      box-shadow:0 2px 12px rgba(0,0,0,.15);
+      background:var(--bg);color:var(--fg);text-align:center;
+      padding:28px 16px; /* antes ~44px */
+      position:sticky;top:0;z-index:10
     }
-    h1{margin:0 0 4px 0; font-size:42px}
-    nav{margin-top:6px}
-    nav a{color:#fff; text-decoration:none; margin:0 12px; font-weight:500}
-    .wrap{max-width:980px; margin:0 auto; padding:22px}
+    h1{margin:0 0 6px 0;font-weight:800;letter-spacing:.2px}
+    nav{margin-top:6px;display:inline-flex;gap:18px;align-items:center}
+    nav a{color:#fff;text-decoration:none;font-weight:600;opacity:.95}
+    nav a:hover{opacity:1;text-decoration:underline}
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin:18px 0;box-shadow:var(--shadow)}
+    .btn{display:inline-flex;gap:10px;align-items:center;background:var(--link);color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:600}
+    .btn.secondary{background:#0b5bd3}
     .muted{color:var(--muted)}
-
-    .card{
-      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
-      padding:22px; margin:18px 0; box-shadow:var(--shadow)
-    }
-    .photo{
-      width:180px; height:180px; border-radius:50%; object-fit:cover; display:block;
-      margin:0 auto 14px; border:4px solid #fff; box-shadow:0 12px 26px rgba(0,0,0,.12)
-    }
-    .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      background:var(--link); color:#fff; padding:12px 16px; border-radius:10px;
-      text-decoration:none; font-weight:600; border:0; cursor:pointer
-    }
-    .btn.secondary{ background:#0ea5e9 }
-
+    .photo{width:180px;height:180px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:4px solid #fff;box-shadow:0 6px 22px rgba(0,0,0,.08)}
+    footer{text-align:center;color:#666;background:#eef0f3;padding:18px;margin-top:24px}
+    .topbar{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:6px}
+    .langbtn{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:20px;padding:6px 10px;cursor:pointer}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:800px){ .grid{grid-template-columns:1fr} }
+    @media (max-width:800px){.grid{grid-template-columns:1fr}}
+    .kpis{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:#fff}
+    .icons a{margin-right:10px;text-decoration:none;color:inherit}
 
-    /* BOTONERA BAJO LA FOTO */
-    .cta-row{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:10px}
+    /* ====== Widget Chat flotante ====== */
+    #erick-chat-widget{
+      position:fixed;right:18px;bottom:18px;width:420px;height:560px;
+      background:#0f2030;border:1px solid #0c1a28;border-radius:14px;
+      box-shadow:0 18px 42px rgba(0,0,0,.35);overflow:hidden;
+      display:none; /* oculto hasta abrir */
+      z-index:9999
+    }
+    @media (max-width:540px){
+      #erick-chat-widget{width:92vw;height:70vh;right:4vw;bottom:14px;border-radius:12px}
+    }
+    .chat-head{
+      display:flex;align-items:center;justify-content:space-between;
+      background:#0f2435;color:#fff;padding:10px 12px
+    }
+    .chat-head .title{display:flex;align-items:center;gap:10px;font-weight:700}
+    .dot{width:8px;height:8px;border-radius:999px;background:#36d399}
+    .chat-actions{display:flex;gap:6px}
+    .chat-btn{
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+      color:#fff;border-radius:8px;padding:4px 8px;cursor:pointer
+    }
+    .chat-body{width:100%;height:calc(100% - 44px);background:#08141f}
+    .chat-body iframe{width:100%;height:100%;border:0}
 
-    /* DOCK DE CHAT (INFERIOR-DERECHA) */
-    #chatDock{
-      position:fixed; right:24px; bottom:24px; width:420px; height:600px;
-      background:#0f172a; color:#e2e8f0; border-radius:14px; overflow:hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,.35); display:none; z-index:9999;
-    }
-    #chatHeader{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:10px 12px; background:#0b1220; color:#cbd5e1; font-weight:600;
-      border-bottom:1px solid rgba(255,255,255,.06)
-    }
-    #chatHeader .status{display:flex; align-items:center; gap:8px}
-    #chatHeader .status .led{width:8px; height:8px; border-radius:50%; background:#22c55e}
-    #chatHeader .actions button{
-      background:transparent; color:#cbd5e1; border:0; cursor:pointer; font-size:18px;
-      padding:2px 8px; border-radius:6px
-    }
-    #chatHeader .actions button:hover{ background:rgba(255,255,255,.06) }
-    #chatFrame{width:100%; height:calc(100% - 44px); border:0; display:block}
-
-    /* MINI (minimizar) */
-    #chatDock.min{ height:56px }
-    #chatDock.min #chatFrame{ display:none }
-
-    /* OVERLAY “DESPERTANDO” */
-    #wakeOverlay{
-      position:fixed; inset:0; background:rgba(15,23,42,.65); backdrop-filter:blur(2px);
-      display:none; align-items:center; justify-content:center; z-index:9998; color:#e2e8f0;
-      font-weight:600; text-align:center; padding:20px
-    }
-    #wakeOverlay .panel{
-      background:#0b1220; border:1px solid rgba(255,255,255,.08);
-      padding:18px 20px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.35)
-    }
+    /* Botón bajo la foto */
+    .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
   </style>
 </head>
 <body>
   <header>
     <h1>Erick Mancia</h1>
     <div class="muted" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
-    <nav>
-      <a href="#about" id="mAbout">About</a>
-      <a href="#experience" id="mExp">Experience</a>
-      <a href="#skills" id="mSkills">Skills</a>
-      <a href="#contact" id="mContact">Contact</a>
-      <!-- SIN link de chat en el menú -->
-      <button class="btn" id="langToggle" style="margin-left:10px;background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;padding:6px 12px">
-        ES
-      </button>
-    </nav>
+    <div class="topbar">
+      <nav>
+        <a href="#about" id="mAbout">About</a>
+        <a href="#experience" id="mExp">Experience</a>
+        <a href="#skills" id="mSkills">Skills</a>
+        <a href="#contact" id="mContact">Contact</a>
+        <!-- 🔹 Chat removido del menú para que no haya 2 botones -->
+      </nav>
+      <button class="langbtn" id="langToggle">ES</button>
+    </div>
   </header>
 
   <main class="wrap">
-    <!-- ABOUT -->
     <section id="about" class="card" style="text-align:center">
       <img src="Erick.jpg" alt="Erick Mancia" class="photo" />
       <h2 id="tAbout">About</h2>
@@ -107,17 +96,11 @@
         SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.
       </p>
       <div class="cta-row">
-        <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
-
-        <!-- ÚNICO DISPARADOR DEL CHAT -->
-        <button class="btn secondary" id="ctaChat">
-          <span style="font-size:18px">💬</span>
-          <span id="ctaText">Chat with me</span>
-        </button>
+        <a class="btn secondary" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
+        <button class="btn" id="chatCta">💬 Habla conmigo</button>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
     <section id="experience" class="card">
       <h2 id="tExp">Selected Experience</h2>
       <ul id="listExp">
@@ -128,65 +111,64 @@
       </ul>
     </section>
 
-    <!-- SKILLS -->
     <section id="skills" class="card">
       <h2 id="tSkills">Key Skills</h2>
-      <div class="grid" id="chips">
-        <span>SQL</span><span>Power BI</span><span>Jet Reports</span><span>Python / R</span>
-        <span>Dynamics 365 BC</span><span>SSIS / SSRS</span><span>C# / VB.NET</span>
+      <div class="kpis" id="chips">
+        <span class="pill">SQL</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Jet Reports</span>
+        <span class="pill">Python / R</span>
+        <span class="pill">Dynamics 365 BC</span>
+        <span class="pill">SSIS / SSRS</span>
+        <span class="pill">C# / VB.NET</span>
       </div>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contact" class="card">
       <h2 id="tContact">Contact</h2>
       <div class="grid">
         <div>
           <p id="cLine">Let’s connect. I’m open to BI / Data / ERP roles.</p>
           <p>
-            📧 <a href="mailto:emancia35@gmail.com">emancia35@gmail.com</a><br>
+            📧 <a href="mailto:emancia35@gmail.com">emancia35@gmail.com</a><br />
             📞 <a href="tel:+14109342686">+1 410-934-2686</a>
           </p>
-          <p class="muted" id="availability"><strong>Availability:</strong> Open to remote/hybrid. Las Vegas, NV (PST).</p>
+          <div class="icons">
+            <a href="https://www.linkedin.com/in/erick-mancia-74426664/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+        <div class="muted">
+          <p id="availability"><strong>Availability:</strong> Open to remote/hybrid. Las Vegas, NV (PST).</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer style="text-align:center; color:#666; background:#eef0f3; padding:18px; margin-top:24px">
-    © <script>document.write(new Date().getFullYear())</script> Erick Mancia
-  </footer>
+  <footer>© <script>document.write(new Date().getFullYear())</script> Erick Mancia</footer>
 
-  <!-- OVERLAY “DESPERTANDO EL BOT” -->
-  <div id="wakeOverlay">
-    <div class="panel">
-      <div style="font-size:14px; opacity:.85">Despertando el bot…</div>
-      <div style="font-size:13px; opacity:.6">Puede tardar unos segundos si el Space estaba dormido.</div>
-    </div>
-  </div>
-
-  <!-- DOCK DEL CHAT (único) -->
-  <div id="chatDock" aria-live="polite">
-    <div id="chatHeader">
-      <div class="status"><span class="led"></span><span id="chatTitle">Chat con Erick</span></div>
-      <div class="actions">
-        <button id="minChat" title="Minimizar">–</button>
-        <button id="closeChat" title="Cerrar">×</button>
+  <!-- ====== Widget ====== -->
+  <div id="erick-chat-widget" aria-live="polite" aria-label="Chat con Erick" role="dialog">
+    <div class="chat-head">
+      <div class="title"><span class="dot"></span> <span id="chatTitle">Chat con Erick</span></div>
+      <div class="chat-actions">
+        <button class="chat-btn" id="btnMin">–</button>
+        <button class="chat-btn" id="btnClose">×</button>
       </div>
     </div>
-    <!-- EMBAJADOR DEL SPACE AJUSTADO -->
-    <iframe
-      id="chatFrame"
-      title="HablaErick"
-      src=""
-      loading="lazy"
-      referrerpolicy="no-referrer"
-      allow="clipboard-read; clipboard-write">
-    </iframe>
+    <div class="chat-body">
+      <iframe
+        id="hfFrame"
+        title="Hugging Face Space"
+        referrerpolicy="origin"
+        loading="eager"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups"
+        allow="clipboard-write *; microphone *; camera *; autoplay *">
+      </iframe>
+    </div>
   </div>
 
   <script>
-    // ===== i18n =====
+    // ========= Traducciones =========
     const t = {
       en: {
         mAbout:"About", mExp:"Experience", mSkills:"Skills", mContact:"Contact",
@@ -196,7 +178,9 @@
         cLine:"Let’s connect. I’m open to BI / Data / ERP roles.",
         availability:"Availability: Open to remote/hybrid. Las Vegas, NV (PST).",
         tagline:"Business Intelligence · Data · Dynamics 365 Business Central",
-        langBtn:"ES", cta:"Chat with me", chatTitle:"Chat with Erick"
+        langBtn:"ES",
+        chatCta:"💬 Chat with me",
+        chatTitle:"Chat with Erick"
       },
       es: {
         mAbout:"Sobre mí", mExp:"Experiencia", mSkills:"Habilidades", mContact:"Contacto",
@@ -206,11 +190,13 @@
         cLine:"Conectemos. Abierto a roles BI / Datos / ERP.",
         availability:"Disponibilidad: Abierto a remoto/híbrido. Las Vegas, NV (PST).",
         tagline:"Business Intelligence · Datos · Dynamics 365 Business Central",
-        langBtn:"EN", cta:"Habla conmigo", chatTitle:"Chat con Erick"
+        langBtn:"EN",
+        chatCta:"💬 Habla conmigo",
+        chatTitle:"Chat con Erick"
       }
     };
-    let lang = 'en';
-    const $ = id => document.getElementById(id);
+    let lang='en';
+    const $=id=>document.getElementById(id);
     function apply(){
       const L=t[lang];
       $("mAbout").textContent=L.mAbout;
@@ -227,45 +213,55 @@
       $("availability").textContent=L.availability;
       $("tagline").textContent=L.tagline;
       $("langToggle").textContent=L.langBtn;
-      $("ctaText").textContent=L.cta;
+      $("chatCta").textContent=L.chatCta;
       $("chatTitle").textContent=L.chatTitle;
     }
-    $("langToggle").onclick=()=>{ lang=(lang==='en'?'es':'en'); apply(); };
+    $("langToggle").onclick=()=>{lang=(lang==='en'?'es':'en');apply()};
     apply();
 
-    // ===== Chat Dock (único) =====
-    const chatDock  = $("chatDock");
-    const chatFrame = $("chatFrame");
-    const wake     = $("wakeOverlay");
-    const cta      = $("ctaChat");
-    const btnMin   = $("minChat");
-    const btnClose = $("closeChat");
+    // ========= Widget Chat =========
+    const HF_SPACE_URL = "https://huggingface.co/spaces/emancia35/hablaerick"; // <— tu Space
+    const widget   = $("erick-chat-widget");
+    const frame    = $("hfFrame");
+    const btnOpen  = $("chatCta");
+    const btnClose = $("btnClose");
+    const btnMin   = $("btnMin");
 
-    // URL del Space (EMBED) — AJUSTADO A TU SPACE
-    const HF_EMBED = "https://hf.space/embed/emancia35/hablaerick/+?__theme=dark";
-
-    function openChat(){
-      if (!chatFrame.src) {
-        wake.style.display = "flex";          // mostrar overlay mientras inicia
-        chatFrame.src = HF_EMBED;
+    let loaded=false;
+    function openWidget(){
+      // Carga solo una vez, evitando pantallas en negro
+      if(!loaded){
+        // Tema oscuro y evita SSR overlays en algunos casos
+        frame.src = HF_SPACE_URL + "?__theme=dark";
+        loaded = true;
       }
-      chatDock.classList.remove("min");
-      chatDock.style.display = "block";
+      widget.style.display="block";
+      widget.dataset.minimized = "false";
+      frame.focus();
     }
-    function closeChat(){
-      chatDock.style.display = "none";
-    }
+    function closeWidget(){ widget.style.display="none" }
     function toggleMin(){
-      chatDock.classList.toggle("min");
+      const isMin = widget.dataset.minimized === "true";
+      if(isMin){
+        widget.style.height = window.innerWidth < 540 ? "70vh" : "560px";
+        widget.dataset.minimized = "false";
+      }else{
+        widget.style.height = "56px";
+        widget.dataset.minimized = "true";
+      }
     }
-    cta.addEventListener("click", openChat);
+
+    btnOpen.addEventListener("click", openWidget);
+    btnClose.addEventListener("click", closeWidget);
     btnMin.addEventListener("click", toggleMin);
-    btnClose.addEventListener("click", closeChat);
 
-    // Quitar overlay cuando el iframe termina de cargar
-    chatFrame.addEventListener("load", ()=>{ wake.style.display="none"; });
-
-    // HARD REFRESH TIP: Ctrl+F5 si no ves cambios por caché de GitHub Pages
+    // Atajo: ESC cierra, Alt+M minimiza
+    window.addEventListener("keydown", (e)=>{
+      if(widget.style.display==="block"){
+        if(e.key==="Escape") closeWidget();
+        if(e.key.toLowerCase()==="m" && (e.altKey||e.metaKey)) toggleMin();
+      }
+    });
   </script>
 </body>
 </html>
