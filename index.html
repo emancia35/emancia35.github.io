@@ -16,90 +16,95 @@
     * { box-sizing: border-box; }
     body { font-family: system-ui, Arial, sans-serif; margin: 0; line-height: 1.6; color: #111; background: #f6f7f9; }
 
-    /* Header más compacto */
+    /* Header más bajo y limpio */
     header {
-      background: var(--bg);
-      color: var(--fg);
-      text-align: center;
-      padding: 22px 16px;           /* ↓ antes 44px */
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+      background: var(--bg); color: var(--fg); text-align: center;
+      padding: 26px 16px; position: sticky; top: 0; z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    h1 { margin: 0 0 4px 0; }       /* ↓ menos margen */
-    .muted-top {
-      color: rgba(255,255,255,.85);
-      font-size: .95rem;            /* ↓ más pequeño */
-    }
-    nav { margin-top: 6px; }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 10px;               /* ↓ menos separación */
-      font-weight: 500;
-    }
+    h1 { margin: 0 0 4px 0; font-size: clamp(24px, 3.4vw, 38px); letter-spacing: .3px; }
+    #tagline { opacity: .9; font-size: 14px; }
 
-    .wrap { max-width: 980px; margin: 0 auto; padding: 20px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin: 16px 0; }
+    nav { margin-top: 6px; display: inline-flex; gap: 20px; align-items: center; }
+    nav a { color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; opacity: .95; }
+    nav a:hover { opacity: 1; text-decoration: underline; }
 
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin: 18px 0; }
     .btn {
-      display: inline-block;
-      background: var(--link);
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      border: 0;
-      cursor: pointer;
-      font-weight: 600;
-      box-shadow: 0 6px 18px rgba(37,99,235,.18);
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--link); color: #fff; padding: 10px 14px; border-radius: 8px;
+      text-decoration: none; font-weight: 600; box-shadow: 0 8px 22px rgba(37,99,235,.25);
     }
-    .btn-ghost {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.35);
-      color: #fff;
-      border-radius: 20px;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
+    .btn.secondary { background: #0ea5e9; }
+    .btn:active { transform: translateY(1px); }
     .muted { color: var(--muted); }
-    .photo {
-      width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
-      display: block; margin: 0 auto 12px; border: 4px solid #fff;
-      box-shadow: 0 6px 22px rgba(0,0,0,.08);
-    }
 
+    .photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 12px; border: 4px solid #fff; box-shadow: 0 6px 22px rgba(0,0,0,.08); }
     footer { text-align: center; color: #666; background: #eef0f3; padding: 18px; margin-top: 24px; }
-    .topbar { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+    .topbar { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 6px; }
     .langbtn { background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 20px; padding: 6px 10px; cursor: pointer; }
 
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 800px) {
-      .grid { grid-template-columns: 1fr; }
-      header { padding: 16px 12px; }               /* Aún más compacto en móvil */
-      .muted-top { font-size: .9rem; }
-      nav a { margin: 0 8px; }
-    }
-
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
     .kpis { display: flex; gap: 14px; flex-wrap: wrap; }
     .pill { border: 1px solid var(--border); border-radius: 999px; padding: 6px 10px; background: #fff; }
+
     .icons a { margin-right: 10px; text-decoration: none; color: inherit; }
     .icons svg { vertical-align: -3px; margin-right: 4px; }
 
-    /* === Chat modal === */
-    .chat-modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(15,36,53,.6);z-index:9999}
-    .chat-card{width:min(1000px,96vw);height:min(720px,86vh);background:#fff;border-radius:14px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;overflow:hidden}
-    .chat-close{position:absolute;top:10px;right:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer}
-    .chat-iframe{width:100%;height:100%;border:0}
-    [hidden].chat-modal{display:none}
+    /* ——— Chat Dock (flotante) ——— */
+    .chat-fab {
+      position: fixed; bottom: 18px; right: 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #2563eb; color: #fff; border: 0; border-radius: 999px;
+      padding: 12px 16px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 10px 26px rgba(0,0,0,.25); z-index: 9999;
+    }
+    .chat-fab svg { width: 18px; height: 18px; }
+
+    .chat-dock {
+      position: fixed; right: 18px; bottom: 78px; /* deja espacio para el FAB */
+      width: min(420px, calc(100vw - 24px));
+      height: min(70vh, 680px);
+      background: #0b0e13; color: #fff;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; overflow: hidden; display: none; z-index: 9999;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+    .chat-head {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(15,36,53,.92);
+      padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .chat-head .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+    .chat-head .title { font-weight: 600; }
+    .chat-head .spacer { flex: 1; }
+    .icon-btn {
+      background: transparent; border: 0; color: #fff; opacity: .85;
+      width: 28px; height: 28px; border-radius: 8px; cursor: pointer;
+    }
+    .icon-btn:hover { opacity: 1; background: rgba(255,255,255,.08); }
+    .chat-body { position: relative; height: calc(100% - 44px); }
+    .chat-body iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      border: 0; background: #111;
+    }
+    .chat-loading {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: #cbd5e1; font-size: 14px; letter-spacing: .2px;
+    }
+
+    @media (max-width: 640px) {
+      .chat-fab { right: 12px; bottom: 12px; }
+      .chat-dock { right: 12px; bottom: 70px; width: calc(100vw - 24px); height: 65vh; }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Erick Mancia</h1>
-    <div class="muted-top" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
+    <div class="muted" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
     <div class="topbar">
       <nav>
         <a href="#about" id="mAbout">About</a>
@@ -120,14 +125,11 @@
         SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.
       </p>
 
-      <!-- CTA principal debajo de la foto -->
-      <p style="margin:14px 0 0;">
-        <button class="btn" id="openChatHero">💬 Chat</button>
-      </p>
-
-      <p style="margin-top:14px;">
-        <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
-      </p>
+      <!-- Acciones debajo de la foto -->
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+        <a id="btnResume" class="btn" href="ErickBI.pdf" target="_blank" rel="noopener">📄 Download Full Resume (PDF)</a>
+        <a id="ctaChat" class="btn secondary" href="javascript:void(0)">💬 Chat with me</a>
+      </div>
     </section>
 
     <section id="experience" class="card">
@@ -170,10 +172,6 @@
               LinkedIn
             </a>
           </div>
-          <!-- Botón secundario de chat en Contact (opcional) -->
-          <p style="margin-top:12px;">
-            <button class="btn" id="openChatContact">💬 Chat</button>
-          </p>
         </div>
         <div class="muted">
           <p id="availability"><strong>Availability:</strong> Open to remote/hybrid. Las Vegas, NV (PST).</p>
@@ -186,51 +184,65 @@
     © <script>document.write(new Date().getFullYear())</script> Erick Mancia
   </footer>
 
-  <!-- Modal con el Space embebido -->
-  <div id="chatModal" class="chat-modal" hidden>
-    <div class="chat-card" role="dialog" aria-modal="true" aria-label="Chat">
-      <button class="chat-close" id="closeChat" aria-label="Close chat">✕</button>
-      <iframe
-        class="chat-iframe"
-        src="https://emancia35-hablaerick.hf.space"
-        title="Erick Chat"
+  <!-- === Chat flotante (Hugging Face) === -->
+  <button id="chatFab" class="chat-fab" aria-haspopup="dialog" aria-controls="chatDock" title="Chat">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.5-4.5A4 4 0 0 1 4 15V7a4 4 0 0 1 4-4h9a4 4 0 0 1 4 4v8z"/>
+    </svg>
+    Chat
+  </button>
+
+  <div id="chatDock" class="chat-dock" role="dialog" aria-modal="false" aria-label="Chat">
+    <div class="chat-head">
+      <span class="dot"></span>
+      <span class="title">Chat con Erick</span>
+      <span class="spacer"></span>
+      <button id="chatMin" class="icon-btn" title="Minimizar" aria-label="Minimizar">–</button>
+      <button id="chatClose" class="icon-btn" title="Cerrar" aria-label="Cerrar">×</button>
+    </div>
+    <div class="chat-body">
+      <div id="chatLoading" class="chat-loading">Despertando el bot…</div>
+      <!-- URL de tu Space (subdominio) -->
+      <iframe id="chatFrame"
+        title="HablaErick"
+        src=""
         loading="lazy"
-        allow="microphone; clipboard-write; web-share"
         referrerpolicy="no-referrer"
-      ></iframe>
+        allow="clipboard-read; clipboard-write">
+      </iframe>
     </div>
   </div>
 
   <script>
+    // Traducciones EN/ES (incluye botón de chat)
     const t = {
       en: {
         mAbout:"About", mExp:"Experience", mSkills:"Skills", mContact:"Contact",
         tAbout:"About", tExp:"Selected Experience", tSkills:"Key Skills", tContact:"Contact",
         pAbout:"BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central, SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.",
         btnResume:"📄 Download Full Resume (PDF)",
+        btnChat:"💬 Chat with me",
         cLine:"Let’s connect. I’m open to BI / Data / ERP roles.",
         availability:"Availability: Open to remote/hybrid. Las Vegas, NV (PST).",
         tagline:"Business Intelligence · Data · Dynamics 365 Business Central",
-        langBtn:"ES",
-        chatBtn:"💬 Chat",
-        chatBtnHero:"💬 Talk with me"
+        langBtn:"ES"
       },
       es: {
         mAbout:"Sobre mí", mExp:"Experiencia", mSkills:"Habilidades", mContact:"Contacto",
         tAbout:"Sobre mí", tExp:"Experiencia destacada", tSkills:"Habilidades clave", tContact:"Contacto",
         pAbout:"Analista BI con 15+ años en Retail, Pricing y Supply Chain. Experto en Microsoft Dynamics 365 Business Central, SQL y Power BI. Uno el análisis funcional con la implementación técnica para resultados basados en datos.",
         btnResume:"📄 Descargar CV completo (PDF)",
+        btnChat:"💬 Habla conmigo",
         cLine:"Conectemos. Abierto a roles BI / Datos / ERP.",
         availability:"Disponibilidad: Abierto a remoto/híbrido. Las Vegas, NV (PST).",
         tagline:"Business Intelligence · Datos · Dynamics 365 Business Central",
-        langBtn:"EN",
-        chatBtn:"💬 Chatear",
-        chatBtnHero:"💬 Habla conmigo"
+        langBtn:"EN"
       }
     };
+
     let lang = 'en';
     const $ = id => document.getElementById(id);
-
     function apply(){
       const L = t[lang];
       $("mAbout").textContent=L.mAbout;
@@ -243,34 +255,44 @@
       $("tContact").textContent=L.tContact;
       $("pAbout").textContent=L.pAbout;
       $("btnResume").textContent=L.btnResume;
+      const cta = $("ctaChat"); if (cta) cta.textContent = L.btnChat;
       $("cLine").textContent=L.cLine;
       $("availability").textContent=L.availability;
       $("tagline").textContent=L.tagline;
       $("langToggle").textContent=L.langBtn;
-      // Botones de chat con idioma
-      const hero = $("openChatHero");
-      const cta2 = $("openChatContact");
-      if (hero) hero.textContent = L.chatBtnHero;
-      if (cta2) cta2.textContent = L.chatBtn;
     }
     $("langToggle").onclick = ()=>{ lang = (lang==='en'?'es':'en'); apply(); };
     apply();
 
-    // Modal chat: abrir/cerrar
-    (function(){
-      const modal    = $("chatModal");
-      const closeBtn = $("closeChat");
-      const heroBtn  = $("openChatHero");
-      const cta2     = $("openChatContact");
+    // ——— Chat Dock ———
+    (function () {
+      // ⚠️ Reemplaza por TU Space si es distinto
+      const HF_URL = "https://emancia35-hablaerick.hf.space";
 
-      function openModal(){ modal.hidden = false; document.body.style.overflow = 'hidden'; }
-      function closeModal(){ modal.hidden = true;  document.body.style.overflow = ''; }
+      const fab = $("chatFab");
+      const dock = $("chatDock");
+      const iframe = $("chatFrame");
+      const loading = $("chatLoading");
+      const btnMin = $("chatMin");
+      const btnClose = $("chatClose");
+      const cta = $("ctaChat"); // botón bajo la foto
 
-      if (heroBtn) heroBtn.addEventListener('click', openModal);
-      if (cta2)    cta2.addEventListener('click', openModal);
-      if (closeBtn) closeBtn.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
-      window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeModal(); });
+      function openDock() {
+        dock.style.display = "block";
+        if (!iframe.src) {
+          loading.style.display = "flex";
+          iframe.src = HF_URL; // podrías usar `${HF_URL}?embed=true`
+          iframe.addEventListener("load", () => {
+            loading.style.display = "none";
+          }, { once: true });
+        }
+      }
+
+      fab.addEventListener("click", openDock);
+      if (cta) cta.addEventListener("click", openDock);
+      btnMin.addEventListener("click", () => dock.style.display = "none");
+      btnClose.addEventListener("click", () => dock.style.display = "none");
+      document.addEventListener("keydown", e => { if (e.key === "Escape") dock.style.display = "none"; });
     })();
   </script>
 </body>
