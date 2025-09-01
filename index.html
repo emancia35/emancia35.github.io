@@ -15,27 +15,80 @@
     }
     * { box-sizing: border-box; }
     body { font-family: system-ui, Arial, sans-serif; margin: 0; line-height: 1.6; color: #111; background: #f6f7f9; }
-    header { background: var(--bg); color: var(--fg); text-align: center; padding: 44px 16px; position: sticky; top: 0; z-index: 10; }
-    h1 { margin: 0 0 6px 0; }
-    nav { margin-top: 8px; }
-    nav a { color: #fff; text-decoration: none; margin: 0 12px; font-weight: 500; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 24px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin: 18px 0; }
-    .btn { display: inline-block; background: var(--link); color: #fff; padding: 10px 14px; border-radius: 8px; text-decoration: none; border: 0; cursor: pointer; }
-    .btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff; }
+
+    /* Header más compacto */
+    header {
+      background: var(--bg);
+      color: var(--fg);
+      text-align: center;
+      padding: 22px 16px;           /* ↓ antes 44px */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    }
+    h1 { margin: 0 0 4px 0; }       /* ↓ menos margen */
+    .muted-top {
+      color: rgba(255,255,255,.85);
+      font-size: .95rem;            /* ↓ más pequeño */
+    }
+    nav { margin-top: 6px; }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;               /* ↓ menos separación */
+      font-weight: 500;
+    }
+
+    .wrap { max-width: 980px; margin: 0 auto; padding: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px; margin: 16px 0; }
+
+    .btn {
+      display: inline-block;
+      background: var(--link);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(37,99,235,.18);
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.35);
+      color: #fff;
+      border-radius: 20px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
     .muted { color: var(--muted); }
-    .photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 12px; border: 4px solid #fff; box-shadow: 0 6px 22px rgba(0,0,0,.08); }
+    .photo {
+      width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+      display: block; margin: 0 auto 12px; border: 4px solid #fff;
+      box-shadow: 0 6px 22px rgba(0,0,0,.08);
+    }
+
     footer { text-align: center; color: #666; background: #eef0f3; padding: 18px; margin-top: 24px; }
     .topbar { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 6px; flex-wrap: wrap; }
     .langbtn { background: transparent; border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 20px; padding: 6px 10px; cursor: pointer; }
+
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+      header { padding: 16px 12px; }               /* Aún más compacto en móvil */
+      .muted-top { font-size: .9rem; }
+      nav a { margin: 0 8px; }
+    }
+
     .kpis { display: flex; gap: 14px; flex-wrap: wrap; }
     .pill { border: 1px solid var(--border); border-radius: 999px; padding: 6px 10px; background: #fff; }
     .icons a { margin-right: 10px; text-decoration: none; color: inherit; }
     .icons svg { vertical-align: -3px; margin-right: 4px; }
 
-    /* === Chat modal (profesional) === */
+    /* === Chat modal === */
     .chat-modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(15,36,53,.6);z-index:9999}
     .chat-card{width:min(1000px,96vw);height:min(720px,86vh);background:#fff;border-radius:14px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;overflow:hidden}
     .chat-close{position:absolute;top:10px;right:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer}
@@ -46,7 +99,7 @@
 <body>
   <header>
     <h1>Erick Mancia</h1>
-    <div class="muted" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
+    <div class="muted-top" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
     <div class="topbar">
       <nav>
         <a href="#about" id="mAbout">About</a>
@@ -54,8 +107,6 @@
         <a href="#skills" id="mSkills">Skills</a>
         <a href="#contact" id="mContact">Contact</a>
       </nav>
-      <!-- Botón de chat en la barra superior -->
-      <button class="btn-ghost" id="openChat">💬 Chat</button>
       <button class="langbtn" id="langToggle">ES</button>
     </div>
   </header>
@@ -68,7 +119,15 @@
         BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central,
         SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.
       </p>
-      <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
+
+      <!-- CTA principal debajo de la foto -->
+      <p style="margin:14px 0 0;">
+        <button class="btn" id="openChatHero">💬 Chat</button>
+      </p>
+
+      <p style="margin-top:14px;">
+        <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
+      </p>
     </section>
 
     <section id="experience" class="card">
@@ -111,9 +170,9 @@
               LinkedIn
             </a>
           </div>
-          <!-- Segundo botón de chat en Contact -->
+          <!-- Botón secundario de chat en Contact (opcional) -->
           <p style="margin-top:12px;">
-            <button class="btn" id="openChat2">💬 Chat</button>
+            <button class="btn" id="openChatContact">💬 Chat</button>
           </p>
         </div>
         <div class="muted">
@@ -153,7 +212,8 @@
         availability:"Availability: Open to remote/hybrid. Las Vegas, NV (PST).",
         tagline:"Business Intelligence · Data · Dynamics 365 Business Central",
         langBtn:"ES",
-        chatBtn:"💬 Chat"
+        chatBtn:"💬 Chat",
+        chatBtnHero:"💬 Talk with me"
       },
       es: {
         mAbout:"Sobre mí", mExp:"Experiencia", mSkills:"Habilidades", mContact:"Contacto",
@@ -164,11 +224,13 @@
         availability:"Disponibilidad: Abierto a remoto/híbrido. Las Vegas, NV (PST).",
         tagline:"Business Intelligence · Datos · Dynamics 365 Business Central",
         langBtn:"EN",
-        chatBtn:"💬 Chatear"
+        chatBtn:"💬 Chatear",
+        chatBtnHero:"💬 Habla conmigo"
       }
     };
     let lang = 'en';
     const $ = id => document.getElementById(id);
+
     function apply(){
       const L = t[lang];
       $("mAbout").textContent=L.mAbout;
@@ -185,26 +247,27 @@
       $("availability").textContent=L.availability;
       $("tagline").textContent=L.tagline;
       $("langToggle").textContent=L.langBtn;
-
-      // Botones de chat multilenguaje
-      const b1 = $("openChat");  if (b1) b1.textContent = L.chatBtn;
-      const b2 = $("openChat2"); if (b2) b2.textContent = L.chatBtn;
+      // Botones de chat con idioma
+      const hero = $("openChatHero");
+      const cta2 = $("openChatContact");
+      if (hero) hero.textContent = L.chatBtnHero;
+      if (cta2) cta2.textContent = L.chatBtn;
     }
     $("langToggle").onclick = ()=>{ lang = (lang==='en'?'es':'en'); apply(); };
     apply();
 
-    // Lógica del modal (abrir/cerrar) + accesos desde ambos botones
+    // Modal chat: abrir/cerrar
     (function(){
       const modal    = $("chatModal");
-      const open1    = $("openChat");
-      const open2    = $("openChat2");
       const closeBtn = $("closeChat");
+      const heroBtn  = $("openChatHero");
+      const cta2     = $("openChatContact");
 
       function openModal(){ modal.hidden = false; document.body.style.overflow = 'hidden'; }
       function closeModal(){ modal.hidden = true;  document.body.style.overflow = ''; }
 
-      if (open1) open1.addEventListener('click', openModal);
-      if (open2) open2.addEventListener('click', openModal);
+      if (heroBtn) heroBtn.addEventListener('click', openModal);
+      if (cta2)    cta2.addEventListener('click', openModal);
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
       window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeModal(); });
