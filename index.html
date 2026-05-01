@@ -1,209 +1,92 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Erick Mancia | BI & Data</title>
   <style>
-    :root {
-      --bg: #0f2435; --fg: #ffffff; --card: #ffffff; --muted: #6b7280;
-      --link: #2563eb; --border: #e5e7eb; --shadow: 0 10px 30px rgba(0,0,0,.18); --radius: 14px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,Arial,Segoe UI,sans-serif;line-height:1.6;color:#111;background:#f6f7f9}
-    header{background:var(--bg);color:var(--fg);text-align:center;padding:28px 16px;position:sticky;top:0;z-index:10}
-    h1{margin:0 0 6px 0;font-weight:800;letter-spacing:.2px}
-    nav{margin-top:6px;display:inline-flex;gap:18px;align-items:center}
-    nav a{color:#fff;text-decoration:none;font-weight:600;opacity:.95}
-    nav a:hover{opacity:1;text-decoration:underline}
-    .wrap{max-width:980px;margin:0 auto;padding:24px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin:18px 0;box-shadow:var(--shadow)}
-    .btn{display:inline-flex;gap:10px;align-items:center;background:var(--link);color:#fff;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:600}
-    .btn.secondary{background:#0b5bd3}
-    .muted{color:var(--muted)}
-    .photo{width:180px;height:180px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;border:4px solid #fff;box-shadow:0 6px 22px rgba(0,0,0,.08)}
-    footer{text-align:center;color:#666;background:#eef0f3;padding:18px;margin-top:24px}
-    .topbar{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:6px}
-    .langbtn{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:20px;padding:6px 10px;cursor:pointer}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    @media (max-width:800px){.grid{grid-template-columns:1fr}}
-    .kpis{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{border:1px solid var(--border);border-radius:999px;padding:6px 10px;background:#fff}
-    .icons a{margin-right:10px;text-decoration:none;color:inherit}
-
-    /* ====== Widget Chat flotante ====== */
-    #erick-chat-widget{
-      position:fixed;right:18px;bottom:18px;width:420px;height:560px;
-      background:#0f2030;border:1px solid #0c1a28;border-radius:14px;
-      box-shadow:0 18px 42px rgba(0,0,0,.35);overflow:hidden;display:none;z-index:9999
-    }
-    @media (max-width:540px){
-      #erick-chat-widget{width:92vw;height:70vh;right:4vw;bottom:14px;border-radius:12px}
-    }
-    .chat-head{display:flex;align-items:center;justify-content:space-between;background:#0f2435;color:#fff;padding:10px 12px}
-    .chat-head .title{display:flex;align-items:center;gap:10px;font-weight:700}
-    .dot{width:8px;height:8px;border-radius:999px;background:#36d399}
-    .chat-actions{display:flex;gap:6px}
-    .chat-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:4px 8px;cursor:pointer}
-    .chat-body{width:100%;height:calc(100% - 44px);background:#08141f;display:grid;place-items:center}
-    .chat-body iframe{width:100%;height:100%;border:0;display:block}
-
-    /* Fila de botones bajo la foto */
-    .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+    body { font-family: system-ui, Arial, sans-serif; margin: 0; line-height: 1.6; color: #111;}
+    header { background:#1f2937; color:#fff; text-align:center; padding:48px 16px;}
+    nav a { color:#fff; text-decoration:none; margin:0 12px; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 24px; }
+    .card { border:1px solid #eee; border-radius:14px; padding:20px; margin:16px 0;}
+    .btn { display:inline-block; background:#2563eb; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; margin:6px 6px 6px 0; }
+    .btn-ai { background:#7c3aed; }
+    .photo { width:180px; height:180px; border-radius:50%; object-fit:cover; margin:12px 0; }
+    footer { text-align:center; color:#666; background:#f6f7f9; padding:18px; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag { background:#e5e7eb; padding:6px 12px; border-radius:6px; font-size:14px; }
   </style>
-
-  <!-- Ayuda a “despertar” el Space más rápido -->
-  <link rel="preconnect" href="https://emancia35-hablaerick.hf.space" crossorigin>
 </head>
 <body>
   <header>
     <h1>Erick Mancia</h1>
-    <div class="muted" id="tagline">Business Intelligence · Data · Dynamics 365 Business Central</div>
-    <div class="topbar">
-      <nav>
-        <a href="#about" id="mAbout">About</a>
-        <a href="#experience" id="mExp">Experience</a>
-        <a href="#skills" id="mSkills">Skills</a>
-        <a href="#contact" id="mContact">Contact</a>
-        <!-- Chat removido del menú para evitar duplicados -->
-      </nav>
-      <button class="langbtn" id="langToggle">ES</button>
-    </div>
+    <p>Business Intelligence · Data · Dynamics 365 Business Central</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
-
   <main class="wrap">
-    <section id="about" class="card" style="text-align:center">
-      <img src="Erick.jpg" alt="Erick Mancia" class="photo" />
-      <h2 id="tAbout">About</h2>
-      <p id="pAbout">
-        BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central,
-        SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.
-      </p>
-      <div class="cta-row">
-        <a class="btn secondary" href="ErickBI.pdf" target="_blank" rel="noopener" id="btnResume">📄 Download Full Resume (PDF)</a>
-        <button class="btn" id="chatCta">💬 Habla conmigo</button>
-      </div>
+    <section id="about" class="card">
+      <img src="erick.jpg" alt="Erick Mancia" class="photo">
+      <h2>About</h2>
+      <p>BI Analyst with 20+ years across Retail, Pricing, and Supply Chain.
+         Hands-on with Microsoft Dynamics 365 Business Central, SQL, Power BI, and Python.
+         I bridge functional analysis and technical implementation to deliver data-driven results.
+         Bilingual: English / Spanish.</p>
+      <a class="btn" href="ErickBI.pdf" target="_blank" rel="noopener">📄 Download Full Resume (PDF)</a>
+      <a class="btn btn-ai" href="https://emancia35-hablaerick.hf.space" target="_blank" rel="noopener">💬 Chat with my AI Assistant</a>
     </section>
-
     <section id="experience" class="card">
-      <h2 id="tExp">Selected Experience</h2>
-      <ul id="listExp">
-        <li><strong>Kwong Yet Lung Co (2022–Present)</strong> — BI Analyst: BC (AL/SQL), Power BI, Jet Reports, Insight Works.</li>
-        <li><strong>Aargon Collection (2021–2022)</strong> — Software Dev Engineer: C#, VB.NET, APIs, SQL.</li>
-        <li><strong>Infosys Mexico (2013–2016)</strong> — BI Support: payments/credit-card ops, Power BI, SQL Server.</li>
-        <li><strong>Walmart MX & C.A. (2002–2013)</strong> — Pricing Analyst & BI Coordinator.</li>
+      <h2>Selected Experience</h2>
+      <ul>
+        <li><strong>Kwong Yet Lung Co (2022–Present)</strong> — BI &amp; ERP Analyst: Business Central (AL/SQL), Power BI, Jet Reports, Insight Works, Python automation.</li>
+        <li><strong>Aargon Collection (2021–2022)</strong> — Software Development Engineer: C#, VB.NET, APIs, SQL.</li>
+        <li><strong>Freelance (2017–2021)</strong> — BI &amp; Operations Consultant: SQL, Python, Power BI for retail/distribution clients.</li>
+        <li><strong>Infosys Mexico (2013–2016)</strong> — BI Lead: Led 5 offshore engineers supporting payments/credit-card operations, Power BI, SQL Server.</li>
+        <li><strong>Walmart MX &amp; Central America (2002–2013)</strong> — BI Coordinator, Pricing Analyst, Supply Chain.</li>
       </ul>
     </section>
-
+    <section id="education" class="card">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>M.S. Applied Statistics for Data Science</strong> — Nebrija University, Madrid, Spain (2024–2025)</li>
+        <li><strong>B.S. Computer Science</strong> — University of Technology (UTEC), El Salvador (2012)</li>
+        <li><strong>Specialization in Data Mining</strong> — UTEC, El Salvador (2011)</li>
+      </ul>
+    </section>
     <section id="skills" class="card">
-      <h2 id="tSkills">Key Skills</h2>
-      <div class="kpis" id="chips">
-        <span class="pill">SQL</span><span class="pill">Power BI</span><span class="pill">Jet Reports</span>
-        <span class="pill">Python / R</span><span class="pill">Dynamics 365 BC</span>
-        <span class="pill">SSIS / SSRS</span><span class="pill">C# / VB.NET</span>
+      <h2>Key Skills</h2>
+      <div class="skills-list">
+        <span class="skill-tag">SQL / T-SQL</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">Jet Reports</span>
+        <span class="skill-tag">SSIS / SSRS / SSAS</span>
+        <span class="skill-tag">Dynamics 365 BC</span>
+        <span class="skill-tag">C# / VB.NET</span>
+        <span class="skill-tag">OpenAI / Hugging Face</span>
+        <span class="skill-tag">n8n</span>
+        <span class="skill-tag">AWS</span>
       </div>
     </section>
-
     <section id="contact" class="card">
-      <h2 id="tContact">Contact</h2>
-      <div class="grid">
-        <div>
-          <p id="cLine">Let’s connect. I’m open to BI / Data / ERP roles.</p>
-          <p>
-            📧 <a href="mailto:emancia35@gmail.com">emancia35@gmail.com</a><br />
-            📞 <a href="tel:+14109342686">+1 410-934-2686</a>
-          </p>
-          <div class="icons">
-            <a href="https://www.linkedin.com/in/erick-mancia-74426664/" target="_blank" rel="noopener">LinkedIn</a>
-          </div>
-        </div>
-        <div class="muted">
-          <p id="availability"><strong>Availability:</strong> Open to remote/hybrid. Las Vegas, NV (PST).</p>
-        </div>
-      </div>
+      <h2>Contact</h2>
+      <p>📧 <a href="mailto:emancia35@gmail.com">emancia35@gmail.com</a></p>
+      <p>📞 <a href="tel:+14109342686">+1 (410) 934-2686</a></p>
+      <p>💼 <a href="https://www.linkedin.com/in/erick-mancia-74426664/" target="_blank" rel="noopener">LinkedIn Profile</a></p>
+      <p>💻 <a href="https://github.com/emancia35" target="_blank" rel="noopener">GitHub</a></p>
+      <p><strong>Availability:</strong> Open to remote/hybrid roles. Currently in Las Vegas, NV (PST). Willing to relocate.</p>
     </section>
   </main>
-
-  <footer>© <script>document.write(new Date().getFullYear())</script> Erick Mancia</footer>
-
-  <!-- ====== Widget Chat ====== -->
-  <div id="erick-chat-widget" aria-live="polite" aria-label="Chat con Erick" role="dialog">
-    <div class="chat-head">
-      <div class="title"><span class="dot"></span> <span id="chatTitle">Chat con Erick</span></div>
-      <div class="chat-actions">
-        <button class="chat-btn" id="btnMin">–</button>
-        <button class="chat-btn" id="btnClose">×</button>
-      </div>
-    </div>
-    <div class="chat-body">
-      <!-- Fallback si algo bloquea el iframe -->
-      <div id="fallback" style="display:none;color:#cdd7e1;padding:14px;text-align:center">
-        Si no ves el chat, ábrelo aquí:
-        <a href="https://emancia35-hablaerick.hf.space" target="_blank" rel="noopener" style="color:#7db3ff">abrir en nueva pestaña</a>
-      </div>
-      <iframe
-        id="hfFrame"
-        title="Hugging Face Space"
-        referrerpolicy="origin"
-        loading="eager"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups"
-        allow="clipboard-write *; microphone *; camera *; autoplay *; web-share *">
-      </iframe>
-    </div>
-  </div>
-
-  <script>
-    /* ====== i18n ====== */
-    const t = {
-      en:{mAbout:"About",mExp:"Experience",mSkills:"Skills",mContact:"Contact",tAbout:"About",tExp:"Selected Experience",tSkills:"Key Skills",tContact:"Contact",
-          pAbout:"BI Analyst with 15+ years across Retail, Pricing, and Supply Chain. Hands-on with Microsoft Dynamics 365 Business Central, SQL, and Power BI. I bridge functional analysis and technical implementation to deliver data-driven results.",
-          btnResume:"📄 Download Full Resume (PDF)",cLine:"Let’s connect. I’m open to BI / Data / ERP roles.",availability:"Availability: Open to remote/hybrid. Las Vegas, NV (PST).",
-          tagline:"Business Intelligence · Data · Dynamics 365 Business Central",langBtn:"ES",chatCta:"💬 Chat with me",chatTitle:"Chat with Erick"},
-      es:{mAbout:"Sobre mí",mExp:"Experiencia",mSkills:"Habilidades",mContact:"Contacto",tAbout:"Sobre mí",tExp:"Experiencia destacada",tSkills:"Habilidades clave",tContact:"Contacto",
-          pAbout:"Analista BI con 15+ años en Retail, Pricing y Supply Chain. Experto en Microsoft Dynamics 365 Business Central, SQL y Power BI. Uno el análisis funcional con la implementación técnica para resultados basados en datos.",
-          btnResume:"📄 Descargar CV completo (PDF)",cLine:"Conectemos. Abierto a roles BI / Datos / ERP.",availability:"Disponibilidad: Abierto a remoto/híbrido. Las Vegas, NV (PST).",
-          tagline:"Business Intelligence · Datos · Dynamics 365 Business Central",langBtn:"EN",chatCta:"💬 Habla conmigo",chatTitle:"Chat con Erick"}
-    };
-    let lang='en';
-    const $=id=>document.getElementById(id);
-    function apply(){
-      const L=t[lang];
-      $("mAbout").textContent=L.mAbout; $("mExp").textContent=L.mExp; $("mSkills").textContent=L.mSkills; $("mContact").textContent=L.mContact;
-      $("tAbout").textContent=L.tAbout; $("tExp").textContent=L.tExp; $("tSkills").textContent=L.tSkills; $("tContact").textContent=L.tContact;
-      $("pAbout").textContent=L.pAbout; $("btnResume").textContent=L.btnResume; $("cLine").textContent=L.cLine; $("availability").textContent=L.availability;
-      $("tagline").textContent=L.tagline; $("langToggle").textContent=L.langBtn; $("chatCta").textContent=L.chatCta; $("chatTitle").textContent=L.chatTitle;
-    }
-    $("langToggle").onclick=()=>{lang=(lang==='en'?'es':'en');apply()}; apply();
-
-    /* ====== Chat widget ====== */
-    const EMBED_URL = "https://emancia35-hablaerick.hf.space/?__theme=dark"; // <- URL correcta para iframe
-    const widget=$("erick-chat-widget"), frame=$("hfFrame"), fb=$("fallback");
-    $("chatCta").addEventListener("click", ()=>openWidget());
-    $("btnClose").addEventListener("click", ()=>widget.style.display="none");
-    $("btnMin").addEventListener("click", ()=>{
-      const min = widget.dataset.minimized==="true";
-      if(min){ widget.style.height = window.innerWidth<540? "70vh":"560px"; widget.dataset.minimized="false"; }
-      else   { widget.style.height = "56px"; widget.dataset.minimized="true"; }
-    });
-    window.addEventListener("keydown",(e)=>{ if(widget.style.display==="block" && e.key==="Escape") widget.style.display="none"; });
-
-    let loaded=false;
-    function openWidget(){
-      widget.style.display="block";
-      if(!loaded){
-        try{
-          frame.src = EMBED_URL;
-          // Si pasados 5s no se pintó nada, muestra fallback
-          const t = setTimeout(()=>{ try {
-            const blank = !frame.contentWindow || frame.contentDocument?.readyState!=="complete";
-            if(blank) fb.style.display="block";
-          } catch (_) { fb.style.display="block"; } }, 5000);
-          frame.addEventListener("load", ()=>clearTimeout(t));
-          loaded=true;
-        }catch(_){ fb.style.display="block"; }
-      }
-      frame.focus();
-    }
-  </script>
+  <footer>
+    © <script>document.write(new Date().getFullYear())</script> Erick Mancia
+  </footer>
 </body>
 </html>
